@@ -3,7 +3,6 @@
 {% load static %}
 {% load utils %}
 
-<!-- Header -->
 {% block title %}
   <title>{{ film.movie_name }} Preview</title>
 
@@ -15,7 +14,35 @@
       border-radius: 0px;
     }
     .imagestyle {
-      box-shadow: 0 4px 8px 0 rgba(185, 65, 223, 88%), 0 6px 20px 0 rgba(4, 47, 243, 99%);
+      .imagestyle {
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra mais leve e natural */
+        border-radius: 8px;
+      }
+    }
+    #movie-content {
+      margin-top: 30px;
+      background-color: #1f2937;
+      color: #f8f9fa;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    .btn-danger {
+      font-size: 1rem;
+      font-weight: bold;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    .btn-danger:hover {
+      background-color: #ff4d4d;
+      transform: scale(1.05);
+    }
+    h1,
+    h2,
+    h3 {
+      font-weight: bold;
+    }
+    p {
+      line-height: 1.6;
     }
   </style>
 {% endblock %}
@@ -23,32 +50,38 @@
 {% block content %}
   <div class="container" id="movie-content">
     <div class="row">
-      <div id="movie-poster" class="col-md-4 d-flex justify-content-center">
-        <div class="card text-center border-0 bgdark" style="width: 18rem;">
-          <img class="card-img-top imagestyle" src="{{ film.url }}" alt="Card image cap" />
-          <div class="card-body">
-            <a href="/show?date={{ '%Y-%m-%d'|cdateadd:'1' }}" class="btn btn-warning">Adquira Seu Ingresso</a>
-          </div>
+      <!-- Movie Poster Section -->
+      <div id="movie-poster" class="col-md-4 d-flex justify-content-center align-items-center">
+        <div class="card text-center border-0" style="width: 18rem;">
+          <img class="card-img-top imagestyle" src="{{ film.url }}" alt="Poster de {{ film.movie_name }}" />
+
+          <a href="/show?date={{ '%Y-%m-%d'|cdateadd:'1' }}" class="btn btn-danger w-100">Adquira Seu Ingresso</a>
         </div>
       </div>
 
-      <div id="movie-info" class="col-md-8" data-movie-id="46306">
-        <div class="hidden-xs">
-          <h1>{{ film.movie_name }}</h1>
-          <h2>{{ film.movie_year }}</h2>
-          <h3>{{ film.movie_lang }} | {{ film.movie_genre }}</h3>
+      <!-- Movie Info Section -->
+      <div id="movie-info" class="col-md-8">
+        <div class="mb-4">
+          <h1 class="display-4">{{ film.movie_name }}</h1>
+          <h2 class="text-muted">{{ film.movie_year }}</h2>
+          <h3 class="text-info">{{ film.movie_lang }} | {{ film.movie_genre }}</h3>
         </div>
-        <p class="hidden-xs hidden-sm">
+        <div class="mb-4">
           {% if showtimes %}
-            <em class="pull-left">Disponível nos horários: &nbsp;</em>
-            <br />
-            {% for show in showtimes %}
-              <a href="/show?date={{ '%Y-%m-%d'|cdateadd:'1' }}" style="padding-left:20px;padding-right:20px;margin-right:10px;" class="btn btn-primary" rel="nofollow">{{ show.showtime|tformat:'%I:%M %p' }}</a>
-            {% endfor %}
+            <p>
+              <strong>Horários Disponíveis:</strong>
+            </p>
+            <div class="d-flex flex-wrap">
+              {% for show in showtimes %}
+                <a href="/show?date={{ '%Y-%m-%d'|cdateadd:'1' }}" class="btn btn-danger m-2">{{ show.showtime|tformat:'%I:%M %p' }}</a>
+              {% endfor %}
+            </div>
           {% else %}
-            <em class="pull-left">No shows Available, Check later&nbsp;</em>
+            <p class="text-warning">
+              <em>Sem exibições disponíveis, tente depois.</em>
+            </p>
           {% endif %}
-        </p>
+        </div>
         <p>{{ film.movie_plot }}</p>
       </div>
     </div>

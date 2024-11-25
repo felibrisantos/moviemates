@@ -12,10 +12,10 @@
 
 
 {% block content %}
-<div class="global-container bgdark">
-  <div class="card login-form bgdark" style="border-style: solid;border-color: yellow;">
+<div class="global-container bg-dark">
+  <div class="card login-form bg-dark" style="border-style: solid;border-color: red;">
   <div class="card-body">
-    <h3 class="card-title text-center text-light">User Registration</h3>
+    <h3 class="card-title text-center text-light">Registro de Usuário</h3>
     {% if account %}
       Account
     {% endif %}
@@ -23,9 +23,9 @@
       <form method="post">
         {% csrf_token %}
             {{form|crispy}}
-            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            <button type="submit" class="btn btn-danger btn-block">Enviar</button>
             <div class="sign-up text-light">
-              Already have an account? <a href="/accounts/usersignin">Login here</a>
+               Ja possui uma conta? <a class = "text-danger" href="/accounts/usersignin">Entre aqui</a>
             </div>
         </form>
     </div>

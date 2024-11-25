@@ -33,7 +33,7 @@
 {% block content %}
   <div class="container" id="movie-content">
     <div class="row">
-      <h2 class="text-primary">Selecione o Horário</h2>
+      <h2 class="text-danger">Selecione o Horário</h2>
     </div>
     <div class="row">
       <form method="get" action="#" id="dateform">
@@ -73,7 +73,7 @@
                 <h1>{{ key }}</h1>
                 <div class="form-group">
                   {% for showid, time in value|get:'showtimes'|items %}
-                    <a class="btn btn-primary showtimebtn" style="padding-left:20px;padding-right:20px;" data-showid="{{ showid }}" data-toggle="modal" data-target="#exampleModalCenter22" href="#">{{ time|tformat:'%I:%M %p' }}</a>
+                    <a class="btn btn-danger showtimebtn" style="padding-left:20px;padding-right:20px;" data-showid="{{ showid }}" data-toggle="modal" data-target="#exampleModalCenter22" href="#">{{ time|tformat:'%I:%M %p' }}</a>
                   {% endfor %}
                 </div>
               </div>
@@ -200,7 +200,7 @@
             <input type="hidden" type="text" name="seats" id="seats_input" />
             <input type="hidden" type="text" name="showid" id="show_id" />
           </form>
-          <button type="button" class="btn btn-primary btn-block bookticketsbtn">Compre Ingressos</button>
+          <button type="button" class="btn btn-danger btn-block bookticketsbtn">Compre Ingressos</button>
           <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Cancelar</button>
         </div>
       </div>

@@ -6,15 +6,14 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
+    <meta name="description" content="MovieMates - Reserve seus ingressos online!" />
+    <meta name="author" content="MovieMates Team" />
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon4.png' %}" />
     <!-- Bootstrap icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap) -->
-
     <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
 
@@ -24,76 +23,105 @@
         min-height: 100vh;
         flex-direction: column;
         font-family: 'Lato', sans-serif;
-      
-        color: white;
+        background-color: #121212;
+        color: #f8f9fa;
       }
       nav {
-        color: white;
+        background-color: #1f2937 !important;
       }
       .content {
         flex: 1;
         padding-top: 50px;
+        padding-bottom: 50px;
       }
       .footerstyle {
-        font-size: 15px;
+        font-size: 14px;
+        color: #adb5bd;
+        text-align: center;
+        padding: 20px 0;
+        background-color: #1f2937;
       }
       .navbarstyle {
-        font-size: 25px;
+        font-size: 20px;
       }
-      .bgdark {
-        background-color: #000814 !important;
+      .navbar-dark .navbar-brand {
+        color: #f8f9fa;
+        font-size: 1.8rem;
+        font-weight: bold;
+      }
+      .navbar-dark .nav-link {
+        color: #f8f9fa;
+        font-size: 1.1rem;
+        margin-right: 15px;
+        transition: color 0.3s ease;
+      }
+      .navbar-dark .nav-link:hover {
+        color: #ff4d4d;
+      }
+      .btn-danger {
+        font-size: 1rem;
+        text-transform: uppercase;
+        font-weight: bold;
+        border-radius: 4px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+      .btn-danger:hover {
+        background-color: #ff4d4d;
+        color: #fff;
       }
       #movie-content {
-        padding-top: 50px;
-        padding-bottom: 30px;
-      }
-      .norounds {
-        border-radius: 0px;
+        text-align: center;
+        padding: 30px;
+        background: #1f2937;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       }
     </style>
+
     {% block title %}
-      <title>Titulo e CSS vem aqui</title>
+      <title>MovieMates - Reserve seus Ingressos</title>
     {% endblock %}
   </head>
-  <body class="bgdark">
+  <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark bgdark">
-      <div class="container px-4 px-lg-5 bg-dark bgdark navbarstyle">
-        <a class="navbar-brand navbarstyle" href="/">MovieMates</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="/">MovieMates</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link text-warning" href="/show?date={{ '%Y-%m-%d'|cdateadd:'1' }}">Compre Ingressos</a>
+              <a class="nav-link text-danger" href="/show?date={{ '%Y-%m-%d'|cdateadd:'1' }}">Compre Ingressos</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-warning" href="/mybookings">Minhas Reservas</a>
+              <a class="nav-link text-danger" href="/mybookings">Minhas Reservas</a>
             </li>
           </ul>
           {% if user.is_authenticated %}
-            <span style="font-size:25px;">
-              Olá {{ user.username }},&emsp;
-              <a href="/accounts/logout">Logout</a>
+            <span style="font-size: 1.2rem; color: #f8f9fa;">
+              Olá, <strong>{{ user.username }}</strong>!
+              <a class="text-danger ms-3" href="/accounts/logout">Logout</a>
             </span>
           {% else %}
-            <a href="/accounts/usersignin" class="btn btn-warning">Login</a>
+            <a href="/accounts/usersignin" class="btn btn-danger">Login</a>
           {% endif %}
         </div>
       </div>
     </nav>
-    <!-- Header -->
 
     <!-- Section -->
     <main class="content">
-      {% block content %}
-        <h1>Main Content Goes here</h1>
-      {% endblock %}
+      <div class="container">
+        {% block content %}
+          <h1 class="text-center">Main Content Goes Here</h1>
+        {% endblock %}
+      </div>
     </main>
 
+    <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    {% comment %} <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> {% endcomment %}
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     {% block js %}
 
     {% endblock %}
