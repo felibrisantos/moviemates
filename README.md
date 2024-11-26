@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/2ec195a5-222d-4f9d-a1de-e436cd4698fa)# moviemates
+![image](https://github.com/user-attachments/assets/2ec195a5-222d-4f9d-a1de-e436cd4698fa)
 
 ![image](https://github.com/user-attachments/assets/69f94353-f247-4165-9e4d-cd020d75c786)
 
