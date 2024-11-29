@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-e_h%5f=0rgjm3(9ps49lt*t+actcc=wuzvi_69$ry(!^v6vlr#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DJANGO_DEBUG", "True") == "True"
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["127.0.0.1", ".vercel.app", ".now.sh"]
 
 
 # Application definition
@@ -112,7 +112,7 @@ DATABASES = {
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "sandbox.smtp.mailtrap.io"
 EMAIL_HOST_USER = "b5b5ca782bdd82"
-EMAIL_HOST_PASSWORD = ""
+EMAIL_HOST_PASSWORD = "be9bd3a3fc96dc"
 EMAIL_PORT = "2525"
 
 # Password validation

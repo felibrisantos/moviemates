@@ -143,7 +143,7 @@ def checkout(request):
         context["sdate"] = show_date
         context["seats"] = seats
         context["show"] = showinfo
-        message = "\nSeus ingressos foram reservados com sucesso. Aqui estão os detalhes. \nO filme é {}. \nA sessão será no dia {}. \nA sessão começa às {}. \nSeus números de assento são {}. \n\nObrigado,\nBookMyTicket".format(
+        message = "\nSeus ingressos foram reservados com sucesso. Aqui estão os detalhes. \nO filme é {}. \nA sessão será no dia {}. \nA sessão começa às {}. \nSeus números de assento são {}. \n\nObrigado,\nMovieMates".format(
             context["film"], show_date, showinfo.showtime, seats
         )
         sendEmail(request, message)
@@ -180,7 +180,7 @@ def userbookings(request):
 @user_passes_test(user_login_required, login_url="/accounts/usersignin")
 def cancelbooking(request, id):
     bobj = booking.objects.get(id=id)
-    message = "\nSeus ingressos foram cancelados com sucesso. Aqui estão os detalhes.\nInformações da sessão: {}\nData da sessão: {}\nSeus assentos: {}\n\nObrigado,\nBookMyTicket".format(
+    message = "\nSeus ingressos foram cancelados com sucesso. Aqui estão os detalhes.\nInformações da sessão: {}\nData da sessão: {}\nSeus assentos: {}\n\nObrigado,\nMovieMates".format(
         bobj.show, bobj.show_date, bobj.seat_num
     )
     ack = "Seus ingressos {} para {} foram cancelados com sucesso".format(
