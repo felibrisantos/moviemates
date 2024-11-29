@@ -14,9 +14,6 @@
       }
     }
   ],
-  "scripts": {
-    "build": "apt-get update && apt-get install -y python3-pip && pip3 install -r requirements.txt && ./build_files.sh"
-  },
   "routes": [
     {
       "src": "/static/(.*)",
