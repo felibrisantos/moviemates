@@ -207,14 +207,79 @@
     </div>
   </div>
   <!-- End of Modal -->
+
+  <!-- Payment Modal -->
+  <div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content bg-dark">
+        <div class="modal-header">
+          <h5 class="modal-title text-light" id="paymentModalLabel">Pagamento</h5>
+          <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body">
+          <form id="paymentForm">
+            <div class="form-group">
+              <label for="cardNumber" class="text-light">Número do Cartão</label>
+              <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 9012 3456" required />
+            </div>
+            <div class="form-group">
+              <label for="cardExpiry" class="text-light">Validade</label>
+              <input type="text" class="form-control" id="cardExpiry" placeholder="MM/AA" required />
+            </div>
+            <div class="form-group">
+              <label for="cardCVC" class="text-light">CVC</label>
+              <input type="text" class="form-control" id="cardCVC" placeholder="123" required />
+            </div>
+            <button type="submit" class="btn btn-danger btn-block">Pagar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success Modal -->
+  <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content bg-dark">
+        <div class="modal-header">
+          <h5 class="modal-title text-light" id="successModalLabel">Sucesso</h5>
+          <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body">
+          <p class="text-light">Pagamento realizado com sucesso!</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" id="successButton">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}
 
 <!-- JS -->
 {% block js %}
   <script>
     $(document).ready(function () {
-      // update movies based on
+      // Abrir o modal de pagamento ao clicar no botão de comprar ingressos
+      $('.bookticketsbtn').click(function () {
+        $('#paymentModal').modal('show')
+      })
     
+      // Processar o pagamento e exibir o popup de sucesso
+      $('#paymentForm').submit(function (event) {
+        event.preventDefault()
+        // Simular pagamento bem-sucedido
+        $('#paymentModal').modal('hide')
+        $('#successModal').modal('show')
+      })
+    
+      // Redirecionar para a página de checkout após fechar o popup de sucesso
+      $('#successButton').click(function () {
+        $('#successModal').modal('hide')
+        $('#target_form').submit()
+      })
+    
+      // Outros scripts existentes
       $('#selectdate').change(function () {
         console.log($(this).val())
         console.log('date changed')
@@ -222,26 +287,17 @@
       })
     
       $('.showtimebtn').click(function () {
-        // Show Seats event
-        seats()
-    
-        var show_id
-        show_id = $(this).attr('data-showid')
-    
-        show_date = $('#show_date').val()
+        var show_id = $(this).attr('data-showid')
+        var show_date = $('#show_date').val()
         $('#show_id').val(show_id)
-        // Clear booked seats info
         $('.seat.occupied').each(function () {
           $(this).removeClass('occupied')
         })
-        // clear selected seat info
         $('.seat.selected').each(function () {
           $(this).removeClass('selected')
         })
         seats()
-    
         console.log(show_id)
-        // Also add to input with type hidden
         $.ajax({
           type: 'GET',
           url: 'bookedseats',
@@ -249,10 +305,9 @@
           success: function (data) {
             console.log(data)
             if (data.length != 0) {
-              //console.log("not empty");
-              booked = data.split(',')
+              var booked = data.split(',')
               console.log(booked)
-              for (id in booked) {
+              for (var id in booked) {
                 $('.seat[sno|=' + booked[id]).addClass('occupied')
               }
             } else {
@@ -260,21 +315,18 @@
             }
           }
         })
-    
         $('#exampleModalCenter').modal('show')
       })
     
       $('.seat').click(function () {
         if (!$(this).hasClass('occupied')) {
-          //if ($(this).hasClass("selected")){
           console.log($(this).attr('sno'))
-          $(this).toggleClass('selected') //toggles selected class
+          $(this).toggleClass('selected')
           seats()
         }
       })
     
       function seats() {
-        // updates seats input field with selected seats
         var selected = []
         $('.seat').each(function (index) {
           if ($(this).hasClass('selected')) {
@@ -286,13 +338,11 @@
         return selected
       }
     
-      $('.bookticketsbtn').click(function () {
-        $('#target_form').submit()
-        console.log('Button clicked')
-      })
-    
       $('#clearselected').click(function () {
-        //clear all selected seats
+        $('.seat.selected').each(function () {
+          $(this).removeClass('selected')
+        })
+        seats()
       })
     })
   </script>
