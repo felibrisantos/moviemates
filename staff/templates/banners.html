@@ -50,8 +50,8 @@
               </td>
               <td>{{ banner.modified|tdiff }}</td>
               <td>
-                <a class="btn btn-primary" href="/" target="_blank">Preview</a>
-                <a class="btn btn-warning" href="/admin/editbanner/{{ banner.id }}">Editar</a>
+                <a class="btn btn-danger" href="/" target="_blank">Preview</a>
+                <a class="btn btn-danger" href="/admin/editbanner/{{ banner.id }}">Editar</a>
                 {% comment %} <a href="#">delete</a> {% endcomment %}
                 <!-- Button trigger modal -->
                 <a class="btn btn-danger" data-id="{{ banner.id }}" href="/admin/deletebanner/{{ banner.id }}">Deletar</a>
