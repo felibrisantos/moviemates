@@ -7,7 +7,7 @@ MovieMates é uma aplicação web para reserva de ingressos de cinema. Os usuár
 
 1. Clone o repositório:
     ```sh
-    git clone https://github.com/seu-usuario/moviemates.git
+    git clone https://github.com/felibrisantos/moviemates.git
     cd moviemates
     ```
 
